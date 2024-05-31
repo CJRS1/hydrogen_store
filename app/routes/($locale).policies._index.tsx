@@ -17,7 +17,7 @@ export default function Policies() {
 
   return (
     <div className="policies">
-      <h1>Policies</h1>
+      <h1>Policiess</h1>
       <div>
         {policies.map((policy) => {
           if (!policy) return null;

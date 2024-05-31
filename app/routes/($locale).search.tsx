@@ -52,7 +52,8 @@ export default function SearchPage() {
 
   return (
     <div className="search">
-      <h1>Search</h1>
+      <h1>Search jiji</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum aperiam, minus id itaque nostrum iste nesciunt temporibus, inventore veritatis similique laboriosam ipsa explicabo, esse quod eveniet? Molestias consequuntur ullam aspernatur!</p>
       <SearchForm searchTerm={searchTerm} />
       {!searchTerm || !searchResults.totalResults ? (
         <NoSearchResults />

@@ -4,12 +4,18 @@ import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/lib/root-data';
 
-type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
+type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'> & {
+  children?: React.ReactNode;
+};
 
 type Viewport = 'desktop' | 'mobile';
 
-export function Header({header, isLoggedIn, cart}: HeaderProps) {
-  const {shop, menu} = header;
+export function Header({ header, isLoggedIn, cart, children }: HeaderProps) {
+  const { shop, menu } = header;
+
+  
+  console.log('menu actualizado', menu);
+
   return (
     <header className="header">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
@@ -20,6 +26,7 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
         viewport="desktop"
         primaryDomainUrl={header.shop.primaryDomain.url}
       />
+      <section>{children}</section> {/* Renderizar children */}
       <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
     </header>
   );
@@ -57,7 +64,7 @@ export function HeaderMenu({
           Home
         </NavLink>
       )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+      {(FALLBACK_HEADER_MENU).items.map((item) => {
         if (!item.url) return null;
 
         // if the url is internal, we strip the domain
@@ -67,6 +74,7 @@ export function HeaderMenu({
           item.url.includes(primaryDomainUrl)
             ? new URL(item.url).pathname
             : item.url;
+          console.log('jiji',item)
         return (
           <NavLink
             className="header-menu-item"
@@ -141,20 +149,29 @@ const FALLBACK_HEADER_MENU = {
       id: 'gid://shopify/MenuItem/461609500728',
       resourceId: null,
       tags: [],
-      title: 'Collections',
+      title: 'Home',
       type: 'HTTP',
-      url: '/collections',
+      url: '/',
       items: [],
     },
     {
-      id: 'gid://shopify/MenuItem/461609533496',
+      id: 'gid://shopify/MenuItem/461609500788',
       resourceId: null,
       tags: [],
-      title: 'Blog',
+      title: 'Collections',
       type: 'HTTP',
-      url: '/blogs/journal',
+      url: '/collections/all',
       items: [],
     },
+    // {
+    //   id: 'gid://shopify/MenuItem/461609533496',
+    //   resourceId: null,
+    //   tags: [],
+    //   title: 'Blog',
+    //   type: 'HTTP',
+    //   url: '/blogs/journal',
+    //   items: [],
+    // },
     {
       id: 'gid://shopify/MenuItem/461609566264',
       resourceId: null,
@@ -164,13 +181,31 @@ const FALLBACK_HEADER_MENU = {
       url: '/policies',
       items: [],
     },
+    // {
+    //   id: 'gid://shopify/MenuItem/461609599032',
+    //   resourceId: 'gid://shopify/Page/92591030328',
+    //   tags: [],
+    //   title: 'About',
+    //   type: 'PAGE',
+    //   url: '/pages/about',
+    //   items: [],
+    // },
+    // {
+    //   id: 'gid://shopify/MenuItem/461609599882',
+    //   resourceId: 'gid://shopify/Page/92591030328',
+    //   tags: [],
+    //   title: 'Us',
+    //   type: 'PAGE',
+    //   url: '/search',
+    //   items: [],
+    // },
     {
-      id: 'gid://shopify/MenuItem/461609599032',
+      id: 'gid://shopify/MenuItem/461609519888',
       resourceId: 'gid://shopify/Page/92591030328',
       tags: [],
-      title: 'About',
+      title: 'Contact',
       type: 'PAGE',
-      url: '/pages/about',
+      url: '/contact',
       items: [],
     },
   ],

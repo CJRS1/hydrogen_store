@@ -68,8 +68,15 @@ body {
   min-height: 100vh;
 }
 
+main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
 body > main {
-  margin: 0 1rem 1rem 1rem;
+  margin: 0 0rem 0rem 0rem;
 }
 
 section {
