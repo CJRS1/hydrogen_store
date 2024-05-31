@@ -1,0 +1,23 @@
+.about_shipping{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #F5F7FA;
+    margin-top: 20px;
+    .about_shipping_card{
+        width: calc(100% / 4);
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
+        p{
+            text-align: justify;
+        }
+    }
+    .vertical-line {
+        border-left: 2px solid black; 
+        height: 200px; 
+      }
+}

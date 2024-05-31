@@ -14,6 +14,7 @@ import {
 import favicon from './assets/favicon.svg';
 import resetStyles from './styles/reset.css?url';
 import appStyles from './styles/app.css?url';
+import aboutStyles from './styles/about.css?url'
 import {Layout} from '~/components/Layout';
 
 /**
@@ -41,6 +42,7 @@ export function links() {
   return [
     {rel: 'stylesheet', href: resetStyles},
     {rel: 'stylesheet', href: appStyles},
+    {rel: 'stylesheet', href: aboutStyles},
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',

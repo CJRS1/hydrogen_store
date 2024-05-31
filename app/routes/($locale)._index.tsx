@@ -6,6 +6,7 @@ import type {
   FeaturedCollectionFragment,
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
+import bg from '../assets/bg.jpg'
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -24,6 +25,12 @@ export default function Homepage() {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="home">
+      <img src={bg} className="img_top" alt="" />
+      <h1 className="name_company">RShippingPeru</h1>
+      <p className="text">
+        Elevating spaces with art. RShippingPeru: Your destination for inspiring
+        wall decor.
+      </p>
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>

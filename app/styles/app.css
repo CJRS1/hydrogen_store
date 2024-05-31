@@ -180,7 +180,6 @@ aside li {
   background: var(--color-dark);
   margin-top: auto;
   padding-top: 10px;
-  margin-top: 20px;
 }
 
 .footer_container{
@@ -378,6 +377,7 @@ aside li {
 
 .recommended-products-grid {
   display: grid;
+  padding: 0 20px 0 20px;
   grid-gap: 1.5rem;
   grid-template-columns: repeat(2, 1fr);
   @media (min-width: 45em) {
@@ -534,6 +534,42 @@ aside li {
   width: 50%;
 }
 
+.home{
+  width: 100%;
+}
+
+/*
+* --------------------------------------------------
+* img
+* --------------------------------------------------
+*/
+
+.img_top{
+  height: calc(100vh - 64px);
+  position: relative;
+  filter: brightness(0.5);
+  width: 100%;
+}
+
+.name_company{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 60px;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.text{
+  
+  position: absolute;
+  top: 63%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+}
 /*
 * --------------------------------------------------
 * contact
