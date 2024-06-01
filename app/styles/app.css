@@ -200,7 +200,6 @@ aside li {
 
 .footer_name{
   color: white;
-  color: red;
   margin-bottom: 10px;
 }
 
@@ -570,6 +569,7 @@ aside li {
   font-size: 20px;
   font-weight: 400;
   color: white;
+  text-align: center;
 }
 /*
 * --------------------------------------------------
@@ -582,7 +582,7 @@ aside li {
   height: 100vh;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
   .footer_container{
     height: auto;
@@ -601,4 +601,25 @@ aside li {
     align-items: center;
     width: 100%;
   }
+
+  .name_company{
+    font-size: 35px;
+  }
+  
+  .text{
+    top: 70%;
+    font-size: 15px;
+    width: 90%;
+  }
+
+}
+
+@media (min-width: 700px) and (max-width: 1400px){
+  
+  .text{
+    top: 70%;
+    text-align: center;
+  }
+
+  
 }

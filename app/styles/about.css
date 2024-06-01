@@ -1,23 +1,68 @@
-.about_shipping{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background: #F5F7FA;
-    margin-top: 20px;
-    .about_shipping_card{
-        width: calc(100% / 4);
-        height: 150px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 20px;
-        p{
-            text-align: justify;
-        }
+.about_shipping {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #f5f7fa;
+  margin-top: 20px;
+  hr{
+    display: none;
+    width: 90%;
+  }
+}
+
+.about_shipping_card {
+  width: calc(100% / 5);
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  p {
+    text-align: justify;
+  }
+  h3{
+    text-align: center;
+  }
+}
+
+.vertical-line {
+  border-left: 2px solid black;
+  height: 200px;
+}
+
+.img_about_container{
+    height: 48px;
+}
+
+@media (max-width: 700px) {
+  .vertical-line {
+    display: none;
+  }
+  .about_shipping {
+    flex-direction: column;
+    width: 100%;
+    hr{
+        display: block;
     }
-    .vertical-line {
-        border-left: 2px solid black; 
-        height: 200px; 
-      }
+  }
+  .about_shipping_card {
+    width: 85%;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1400px) {
+  .text {
+    top: 70%;
+    text-align: center;
+  }
+  .about_shipping{
+    height: 350px;
+  }
+  .vertical-line {
+    height: 250px;
+  }
+  .about_shipping_card{
+    height: 200px;
+  }
 }
