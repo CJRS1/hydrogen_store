@@ -49,6 +49,7 @@ export default function Orders() {
   const {orders} = customer;
   return (
     <div className="orders">
+      ss
       {orders.nodes.length ? <OrdersTable orders={orders} /> : <EmptyOrders />}
     </div>
   );

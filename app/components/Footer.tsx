@@ -62,6 +62,9 @@ function FooterMenu({
             );
           })}
         </nav>
+        <div className="section_divider_links">
+        <hr />
+      </div>
         <nav className="footer-menu" role="navigation">
           <h2 className="footer_name">Policies</h2>
           {FALLBACK_FOOTER_MENU.items.map((item) => {
@@ -96,9 +99,15 @@ function FooterMenu({
             );
           })}
         </nav>
+        <div className="section_divider_links">
+        <hr />
+      </div>
         <div className="footer-menu contact_us">
           <h2 className="footer_name">Contact Us</h2>
         </div>
+        <div className="section_divider_links">
+        <hr />
+      </div>
         <div className="footer-menu social">
           <h2 className="footer_name">Social Media</h2>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia beatae distinctio modi dolore, ipsam culpa, voluptatem expedita sed voluptate repudiandae assumenda perspiciatis, qui ex minus odit. Aliquid laudantium blanditiis reprehenderit?</p>
@@ -213,15 +222,15 @@ const FALLBACK_HEADER_MENU = {
     //   url: '/search',
     //   items: [],
     // },
-    {
-      id: 'gid://shopify/MenuItem/461609519888',
-      resourceId: 'gid://shopify/Page/92591030328',
-      tags: [],
-      title: 'Contact',
-      type: 'PAGE',
-      url: '/contact',
-      items: [],
-    },
+    // {
+    //   id: 'gid://shopify/MenuItem/461609519888',
+    //   resourceId: 'gid://shopify/Page/92591030328',
+    //   tags: [],
+    //   title: 'Contact',
+    //   type: 'PAGE',
+    //   url: '/contact',
+    //   items: [],
+    // },
   ],
 };
 

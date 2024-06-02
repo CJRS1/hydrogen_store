@@ -1,0 +1,12 @@
+.call_us{
+    width: 100%;
+    background: black;
+}
+
+.call_us_text{
+    text-align: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    color: white;
+}

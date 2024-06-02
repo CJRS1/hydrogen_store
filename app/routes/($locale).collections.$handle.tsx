@@ -38,7 +38,7 @@ export async function loader({request, params, context}: LoaderFunctionArgs) {
 
 export default function Collection() {
   const {collection} = useLoaderData<typeof loader>();
-
+  console.log('holña0,',collection)
   return (
     <div className="collection">
       <h1>{collection.title}</h1>

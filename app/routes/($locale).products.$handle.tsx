@@ -25,6 +25,8 @@ import type {
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/lib/variants';
+import { AddToCartButton } from '../components/AddToCartButton';
+
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -225,7 +227,7 @@ function ProductForm({
         {({option}) => <ProductOptions key={option.name} option={option} />}
       </VariantSelector>
       <br />
-      <AddToCartButton
+      {/* <AddToCartButton
         disabled={!selectedVariant || !selectedVariant.availableForSale}
         onClick={() => {
           window.location.href = window.location.href + '#cart-aside';
@@ -240,6 +242,30 @@ function ProductForm({
               ]
             : []
         }
+      >
+        {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+      </AddToCartButton> */}
+            <AddToCartButton
+        disabled={!selectedVariant || !selectedVariant.availableForSale}
+        lines={
+          selectedVariant
+            ? [
+                {
+                  merchandiseId: selectedVariant.id,
+                  quantity: 1,
+                },
+              ]
+            : []
+        }
+        productAnalytics={{
+          // Define los datos de analíticas aquí
+          productGid: product.id,
+          variantGid: selectedVariant?.id,
+          name: product.title,
+          brand: product.vendor,
+          price: selectedVariant?.price.amount ?? ''
+          // variant: selectedVariant?.title,
+        }}
       >
         {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
       </AddToCartButton>
@@ -276,40 +302,40 @@ function ProductOptions({option}: {option: VariantOption}) {
   );
 }
 
-function AddToCartButton({
-  analytics,
-  children,
-  disabled,
-  lines,
-  onClick,
-}: {
-  analytics?: unknown;
-  children: React.ReactNode;
-  disabled?: boolean;
-  lines: CartLineInput[];
-  onClick?: () => void;
-}) {
-  return (
-    <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
-      {(fetcher: FetcherWithComponents<any>) => (
-        <>
-          <input
-            name="analytics"
-            type="hidden"
-            value={JSON.stringify(analytics)}
-          />
-          <button
-            type="submit"
-            onClick={onClick}
-            disabled={disabled ?? fetcher.state !== 'idle'}
-          >
-            {children}
-          </button>
-        </>
-      )}
-    </CartForm>
-  );
-}
+// function AddToCartButton({
+//   analytics,
+//   children,
+//   disabled,
+//   lines,
+//   onClick,
+// }: {
+//   analytics?: unknown;
+//   children: React.ReactNode;
+//   disabled?: boolean;
+//   lines: CartLineInput[];
+//   onClick?: () => void;
+// }) {
+//   return (
+//     <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
+//       {(fetcher: FetcherWithComponents<any>) => (
+//         <>
+//           <input
+//             name="analytics"
+//             type="hidden"
+//             value={JSON.stringify(analytics)}
+//           />
+//           <button
+//             type="submit"
+//             onClick={onClick}
+//             disabled={disabled ?? fetcher.state !== 'idle'}
+//           >
+//             {children}
+//           </button>
+//         </>
+//       )}
+//     </CartForm>
+//   );
+// }
 
 const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariant on ProductVariant {

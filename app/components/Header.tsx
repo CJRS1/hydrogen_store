@@ -17,6 +17,7 @@ export function Header({ header, isLoggedIn, cart, children }: HeaderProps) {
   console.log('menu actualizado', menu);
 
   return (
+
     <header className="header">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
         <strong>{shop.name}</strong>
@@ -53,7 +54,7 @@ export function HeaderMenu({
 
   return (
     <nav className={className} role="navigation">
-      {viewport === 'mobile' && (
+      {/* {viewport === 'mobile' && (
         <NavLink
           end
           onClick={closeAside}
@@ -63,10 +64,9 @@ export function HeaderMenu({
         >
           Home
         </NavLink>
-      )}
+      )} */}
       {(FALLBACK_HEADER_MENU).items.map((item) => {
         if (!item.url) return null;
-
         // if the url is internal, we strip the domain
         const url =
           item.url.includes('myshopify.com') ||
@@ -76,17 +76,32 @@ export function HeaderMenu({
             : item.url;
           console.log('jiji',item)
         return (
-          <NavLink
-            className="header-menu-item"
-            end
-            key={item.id}
-            onClick={closeAside}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-          >
-            {item.title}
-          </NavLink>
+          <div className="header-menu-item-container" key={item.id}>
+            <NavLink
+              className="header-menu-item"
+              end
+              onClick={closeAside}
+              prefetch="intent"
+              style={activeLinkStyle}
+              to={url}
+            >
+              {item.title}
+            </NavLink>
+            {item.items && item.items.length > 0 && (
+              <div className="submenu">
+                {item.items.map(subitem => (
+                  <NavLink
+                    key={subitem.id}
+                    className="submenu-item"
+                    to={subitem.url}
+                    style={activeLinkStyle}
+                  >
+                    {subitem.title}
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
         );
       })}
     </nav>
@@ -161,7 +176,32 @@ const FALLBACK_HEADER_MENU = {
       title: 'Collections',
       type: 'HTTP',
       url: '/collections/all',
-      items: [],
+      items: [
+        {
+          id: 'gid://shopify/MenuItem/1',
+          resourceId: null,
+          tags: [],
+          title: 'Baroque',
+          type: 'HTTP',
+          url: '/collections/baroque',
+        },
+        {
+          id: 'gid://shopify/MenuItem/2',
+          resourceId: null,
+          tags: [],
+          title: 'Category 2',
+          type: 'HTTP',
+          url: '/collections/Lienzos para pintar',
+        },
+        {
+          id: 'gid://shopify/MenuItem/3',
+          resourceId: null,
+          tags: [],
+          title: 'Category 3',
+          type: 'HTTP',
+          url: '/collections/sin',
+        },
+      ],
     },
     // {
     //   id: 'gid://shopify/MenuItem/461609533496',
@@ -199,15 +239,15 @@ const FALLBACK_HEADER_MENU = {
     //   url: '/search',
     //   items: [],
     // },
-    {
-      id: 'gid://shopify/MenuItem/461609519888',
-      resourceId: 'gid://shopify/Page/92591030328',
-      tags: [],
-      title: 'Contact',
-      type: 'PAGE',
-      url: '/contact',
-      items: [],
-    },
+    // {
+    //   id: 'gid://shopify/MenuItem/461609519888',
+    //   resourceId: 'gid://shopify/Page/92591030328',
+    //   tags: [],
+    //   title: 'Contact',
+    //   type: 'PAGE',
+    //   url: '/contact',
+    //   items: [],
+    // },
   ],
 };
 

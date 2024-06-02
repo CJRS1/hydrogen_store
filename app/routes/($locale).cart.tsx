@@ -5,17 +5,20 @@ import {CartForm} from '@shopify/hydrogen';
 import {json, type ActionFunctionArgs} from '@shopify/remix-oxygen';
 import {CartMain} from '~/components/Cart';
 import {useRootLoaderData} from '~/lib/root-data';
+import {AnalyticsPageType} from '@shopify/hydrogen';
 
 export const meta: MetaFunction = () => {
   return [{title: `Hydrogen | Cart`}];
 };
 
 export async function action({request, context}: ActionFunctionArgs) {
-  const {cart} = context;
+  const {cart, session} = context;
 
   const formData = await request.formData();
 
   const {action, inputs} = CartForm.getFormInput(formData);
+
+  const sessionId = await session.get('cartId');
 
   if (!action) {
     throw new Error('No action provided');
@@ -58,7 +61,7 @@ export async function action({request, context}: ActionFunctionArgs) {
       throw new Error(`${action} cart action is not defined`);
   }
 
-  const cartId = result.cart.id;
+  // const cartId = result.cart.id;
   const headers = cart.setCartId(result.cart.id);
   const {cart: cartResult, errors} = result;
 
@@ -69,13 +72,16 @@ export async function action({request, context}: ActionFunctionArgs) {
   }
 
   headers.append('Set-Cookie', await context.session.commit());
-
+  console.log('Metafields being set:', JSON.stringify(inputs.metafields));
+  console.log('Metafields being set:', JSON.stringify(inputs.metafields));
+  console.log('jola')
   return json(
     {
       cart: cartResult,
       errors,
       analytics: {
-        cartId,
+        pageType: AnalyticsPageType.cart,
+        sessionId,
       },
     },
     {status, headers},
@@ -85,7 +91,7 @@ export async function action({request, context}: ActionFunctionArgs) {
 export default function Cart() {
   const rootData = useRootLoaderData();
   const cartPromise = rootData.cart;
-
+  console.log('holaa1a')
   return (
     <div className="cart">
       <h1>Cart</h1>
