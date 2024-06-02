@@ -30,7 +30,7 @@ export function CartMain({layout, cart}: CartMainProps) {
 
 function CartDetails({layout, cart}: CartMainProps) {
   const cartHasItems = !!cart && cart.totalQuantity > 0;
-
+  console.log('elcart',cart)
   return (
     <div className="cart-details">
       <CartLines lines={cart?.lines} layout={layout} />
@@ -120,6 +120,7 @@ function CartLineItem({
 }
 
 function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
+  console.log('check',checkoutUrl)
   if (!checkoutUrl) return null;
 
   return (

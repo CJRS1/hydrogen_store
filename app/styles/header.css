@@ -15,6 +15,7 @@
     top: 0;
     z-index: 1;
     font-size: 20px;
+    /* background-color: hsla(var(--color-contrast), var(--bg-opacity)); */
     a{
         color: white !important;
     }
@@ -57,6 +58,16 @@
       margin-left: 3rem;
     }
   } */
+  .cart_count{
+    position: relative;
+    height: 25px;
+    strong{
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 15px;
+      }
+  }
   
   .header-menu-item {
     cursor: pointer;

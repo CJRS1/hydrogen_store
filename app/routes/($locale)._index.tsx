@@ -26,12 +26,15 @@ export default function Homepage() {
   return (
     <div className="home">
       <img src={bg} className="img_top" alt="" />
+      <div className="container_s">
+
       <h1 className="name_company">RShippingPeru</h1>
       <p className="text">
         Elevating spaces with art. RShippingPeru: Your destination for inspiring
         wall decor.
       </p>
-      <FeaturedCollection collection={data.featuredCollection} />
+      </div>
+      {/* <FeaturedCollection collection={data.featuredCollection} /> */}
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
   );

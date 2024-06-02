@@ -3,6 +3,7 @@ import {Suspense} from 'react';
 import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/lib/root-data';
+import img_user from '../assets/user.svg';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'> & {
   children?: React.ReactNode;
@@ -10,14 +11,12 @@ type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'> & {
 
 type Viewport = 'desktop' | 'mobile';
 
-export function Header({ header, isLoggedIn, cart, children }: HeaderProps) {
-  const { shop, menu } = header;
+export function Header({header, isLoggedIn, cart, children}: HeaderProps) {
+  const {shop, menu} = header;
 
-  
   console.log('menu actualizado', menu);
 
   return (
-
     <header className="header">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
         <strong>{shop.name}</strong>
@@ -65,7 +64,7 @@ export function HeaderMenu({
           Home
         </NavLink>
       )} */}
-      {(FALLBACK_HEADER_MENU).items.map((item) => {
+      {FALLBACK_HEADER_MENU.items.map((item) => {
         if (!item.url) return null;
         // if the url is internal, we strip the domain
         const url =
@@ -74,7 +73,6 @@ export function HeaderMenu({
           item.url.includes(primaryDomainUrl)
             ? new URL(item.url).pathname
             : item.url;
-          console.log('jiji',item)
         return (
           <div className="header-menu-item-container" key={item.id}>
             <NavLink
@@ -89,7 +87,7 @@ export function HeaderMenu({
             </NavLink>
             {item.items && item.items.length > 0 && (
               <div className="submenu">
-                {item.items.map(subitem => (
+                {item.items.map((subitem) => (
                   <NavLink
                     key={subitem.id}
                     className="submenu-item"
@@ -116,9 +114,14 @@ function HeaderCtas({
     <nav className="header-ctas" role="navigation">
       <HeaderMenuMobileToggle />
       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        <Suspense fallback="Sign in">
-          <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
+        <Suspense fallback="Sign ins">
+          <Await
+            resolve={isLoggedIn}
+            errorElement={<img src={img_user} alt="Error" />}
+          >
+            {(isLoggedIn) =>
+              isLoggedIn ? 'Account' : <img src={img_user} alt="Error" />
+            }
           </Await>
         </Suspense>
       </NavLink>
@@ -137,11 +140,40 @@ function HeaderMenuMobileToggle() {
 }
 
 function SearchToggle() {
-  return <a href="#search-aside">Search</a>;
+  return (
+    <a href="#search-aside">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="currentColor"
+        className="bi bi-search-heart"
+        viewBox="0 0 16 16"
+      >
+        <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018" />
+        <path d="M13 6.5a6.47 6.47 0 0 1-1.258 3.844q.06.044.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11" />
+      </svg>
+    </a>
+  );
 }
 
 function CartBadge({count}: {count: number}) {
-  return <a href="#cart-aside">Cart {count}</a>;
+  return (
+    <a href="#cart-aside" className='cart_count'>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="currentColor"
+        className="bi bi-cart-check"
+        viewBox="0 0 16 16"
+      >
+        <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z" />
+        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+      </svg>{' '}
+      <strong>{count}</strong>
+    </a>
+  );
 }
 
 function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {

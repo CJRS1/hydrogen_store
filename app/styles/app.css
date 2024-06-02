@@ -6,6 +6,8 @@
   --header-height: 64px;
   --color-dark: #000;
   --color-light: #fff;
+  --color-contrast: 0, 0%, 100%; /* Ejemplo de un color HSL */
+  --bg-opacity: 0.7; /* Ejemplo de opacidad */
 }
 
 img {
@@ -256,6 +258,17 @@ aside li {
   object-fit: cover;
 }
 
+.recommended-products{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  h2{
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    margin-bottom: 20px;
+  }
+}
+
 .recommended-products-grid {
   display: grid;
   padding: 0 20px 0 20px;
@@ -411,8 +424,9 @@ aside li {
 */
 
 .policy{
-  background: blue;
   width: 50%;
+  margin-top:70px;
+  color: white;
 }
 
 .home{
@@ -432,40 +446,52 @@ aside li {
   width: 100%;
 }
 
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /* Evita el scroll horizontal */
+  background-color: black; /* Ajusta según tu diseño */
+}
+
 .name_company {
   position: absolute;
   top: 50%;
-  left: -50%;
+  left: 50%;
   font-size: 80px;
   transform: translate(-50%, -50%);
   color: white;
-  animation: slideInFromLeft 2s forwards;
+  clip-path: inset(0 100% 0 0);
+  animation: slideInFromRight 1.8s forwards;
 }
 
 .text {
   position: absolute;
   top: 70%;
-  left: 150%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
   font-size: 25px;
   font-weight: 400;
   color: white;
   text-align: center;
+  clip-path: inset(0 100% 0 0);
   animation: slideInFromRight 2s forwards;
 }
 
-@keyframes slideInFromLeft {
+/* @keyframes slideInFromLeft {
   to {
-    left: 50%;
+    clip-path: inset(0 0 0 0);
   }
-}
+} */
 
 @keyframes slideInFromRight {
   to {
-    left: 50%;
+    clip-path: inset(0 0 0 0);
   }
 }
+
+
 /*
 * --------------------------------------------------
 * contact
@@ -484,6 +510,12 @@ aside li {
     top: 65%;
     font-size: 20px;
     width: 90%;
+  }
+
+  .recommended-products{
+    h2{
+      font-size: 28px;
+    }
   }
 
 }
