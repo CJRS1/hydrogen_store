@@ -498,6 +498,24 @@ aside li {
 * --------------------------------------------------
 */
 
+/*
+* --------------------------------------------------
+* layout
+* --------------------------------------------------
+*/
+
+.video_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  width: 100%;
+  video{
+    width: 80%;
+    border-radius: 20px;
+  }
+}
+
 
 
 @media (max-width: 700px) {

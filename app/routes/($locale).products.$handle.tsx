@@ -25,8 +25,7 @@ import type {
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/lib/variants';
-import { AddToCartButton } from '../components/AddToCartButton';
-
+import {AddToCartButton} from '../components/AddToCartButton';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `RShippingPeru | ${data?.product.title ?? ''}`}];
@@ -147,30 +146,32 @@ function ProductMain({
   return (
     <div className="product-main">
       <h1>{title}</h1>
-      <ProductPrice selectedVariant={selectedVariant} />
-      <br />
-      <Suspense
-        fallback={
-          <ProductForm
-            product={product}
-            selectedVariant={selectedVariant}
-            variants={[]}
-          />
-        }
-      >
-        <Await
-          errorElement="There was a problem loading product variants"
-          resolve={variants}
-        >
-          {(data) => (
+      <div className="product_price_add">
+        <ProductPrice selectedVariant={selectedVariant} />
+        <br />
+        <Suspense
+          fallback={
             <ProductForm
               product={product}
               selectedVariant={selectedVariant}
-              variants={data.product?.variants.nodes || []}
+              variants={[]}
             />
-          )}
-        </Await>
-      </Suspense>
+          }
+        >
+          <Await
+            errorElement="There was a problem loading product variants"
+            resolve={variants}
+          >
+            {(data) => (
+              <ProductForm
+                product={product}
+                selectedVariant={selectedVariant}
+                variants={data.product?.variants.nodes || []}
+              />
+            )}
+          </Await>
+        </Suspense>
+      </div>
       <br />
       <br />
       <p>
@@ -245,7 +246,7 @@ function ProductForm({
       >
         {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
       </AddToCartButton> */}
-            <AddToCartButton
+      <AddToCartButton
         disabled={!selectedVariant || !selectedVariant.availableForSale}
         lines={
           selectedVariant
@@ -263,7 +264,7 @@ function ProductForm({
           variantGid: selectedVariant?.id,
           name: product.title,
           brand: product.vendor,
-          price: selectedVariant?.price.amount ?? ''
+          price: selectedVariant?.price.amount ?? '',
           // variant: selectedVariant?.title,
         }}
       >

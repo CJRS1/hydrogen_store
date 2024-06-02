@@ -7,6 +7,7 @@ import type {
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import bg from '../assets/bg.jpg'
+import video from '../assets/0602.mp4'
 
 export const meta: MetaFunction = () => {
   return [{title: 'RShippingPeru | Home'}];
@@ -33,6 +34,11 @@ export default function Homepage() {
         Elevating spaces with art. RShippingPeru: Your destination for inspiring
         wall decor.
       </p>
+      </div>
+      <div className="video_container">
+      <video src={video} className="video" loop autoPlay muted playsInline>
+          Your browser does not support the video tag.
+        </video>
       </div>
       {/* <FeaturedCollection collection={data.featuredCollection} /> */}
       <RecommendedProducts products={data.recommendedProducts} />

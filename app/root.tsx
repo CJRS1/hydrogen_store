@@ -20,6 +20,7 @@ import headerStyles from './styles/header.css?url'
 import callusStyles from './styles/callus.css?url'
 import footerStyles from './styles/footer.css?url'
 import notfoundStyles from './styles/notfound.css?url'
+import productsStyles from './styles/products.css?url'
 import {Layout} from '~/components/Layout';
 
 /**
@@ -55,6 +56,7 @@ export function links() {
     {rel: 'stylesheet', href: callusStyles},
     {rel: 'stylesheet', href: footerStyles},
     {rel: 'stylesheet', href: notfoundStyles},
+    {rel: 'stylesheet', href: productsStyles},
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
@@ -163,7 +165,7 @@ export function ErrorBoundary() {
               </fieldset>
             )}
             <p>The page you are looking for doesn't exist or has been moved.</p>
-            <Link to="/">Go back and continue shopping</Link>
+            <Link to="/" className='go_back_button'>Go back and continue shopping</Link>
           </div>
         </Layout>
         <ScrollRestoration nonce={nonce} />

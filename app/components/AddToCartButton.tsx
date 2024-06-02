@@ -103,6 +103,7 @@ export function AddToCartButton({
               <button
                 type="submit"
                 disabled={disabled  ?? fetcher.state !== 'idle'}
+                className='add_to_cart_button'
               >
                 {children}
               </button>

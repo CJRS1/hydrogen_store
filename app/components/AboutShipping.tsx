@@ -1,4 +1,31 @@
+import React, {useEffect} from 'react';
+
 export default function AboutShipping() {
+  useEffect(() => {
+    const cards = document.querySelectorAll('.about_shipping_card');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+            observer.unobserve(entry.target); // Deja de observar una vez que la animación ha sido aplicada
+          }
+        });
+      },
+      { threshold: 0.1 } // 10% del elemento visible
+    );
+
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
+
+    return () => {
+      cards.forEach((card) => {
+        observer.unobserve(card);
+      });
+    };
+  }, []);
   return (
     <section className="about_shipping">
       <div className="about_shipping_card">

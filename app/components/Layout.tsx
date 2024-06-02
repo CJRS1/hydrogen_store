@@ -14,7 +14,8 @@ import {
   PredictiveSearchResults,
 } from '~/components/Search';
 import AboutShipping from './AboutShipping';
-import CallUs from './CallUs'
+import CallUs from './CallUs';
+
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -36,13 +37,15 @@ export function Layout({
       <CartAside cart={cart} />
       <SearchAside />
       <MobileMenuAside menu={header?.menu} shop={header?.shop} />
-      {header && <CallUs/>} 
+      {header && <CallUs />}
       {header && <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />}
       <main>{children}</main>
-      {header && <AboutShipping/>}
+      {header && <AboutShipping />}
       <Suspense>
         <Await resolve={footer}>
-          {(footer) => header && <Footer menu={footer?.menu} shop={header?.shop} />}
+          {(footer) =>
+            header && <Footer menu={footer?.menu} shop={header?.shop} />
+          }
         </Await>
       </Suspense>
     </>
