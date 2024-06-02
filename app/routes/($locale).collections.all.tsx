@@ -10,7 +10,7 @@ import type {ProductItemFragment} from 'storefrontapi.generated';
 import {useVariantUrl} from '~/lib/variants';
 
 export const meta: MetaFunction<typeof loader> = () => {
-  return [{title: `Hydrogen | Products`}];
+  return [{title: `RShippingPeru | Products`}];
 };
 
 export async function loader({request, context}: LoaderFunctionArgs) {

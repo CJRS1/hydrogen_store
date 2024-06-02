@@ -417,6 +417,7 @@ aside li {
 
 .home{
   width: 100%;
+  height: 100%;
 }
 
 /*
@@ -426,31 +427,44 @@ aside li {
 */
 
 .img_top{
-  height: calc(100vh - 64px);
-  position: relative;
-  filter: brightness(0.5);
+  height: calc(100vh - 42.4px);
+  filter: brightness(0.3);
   width: 100%;
 }
 
-.name_company{
+.name_company {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: -50%;
   font-size: 80px;
   transform: translate(-50%, -50%);
   color: white;
+  animation: slideInFromLeft 2s forwards;
 }
 
-.text{
-  
+.text {
   position: absolute;
   top: 70%;
-  left: 50%;
+  left: 150%;
   transform: translate(-50%, -50%);
+  width: 80%;
   font-size: 25px;
   font-weight: 400;
   color: white;
   text-align: center;
+  animation: slideInFromRight 2s forwards;
+}
+
+@keyframes slideInFromLeft {
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slideInFromRight {
+  to {
+    left: 50%;
+  }
 }
 /*
 * --------------------------------------------------
@@ -463,17 +477,44 @@ aside li {
 @media (max-width: 700px) {
 
   .name_company{
-    font-size: 35px;
+    font-size: 70px;
   }
   
   .text{
-    top: 70%;
-    font-size: 15px;
+    top: 65%;
+    font-size: 20px;
     width: 90%;
   }
 
 }
 
+@media (max-width: 550px) {
+
+  .name_company{
+    font-size: 60px;
+  }
+  
+  .text{
+    top: 65%;
+    font-size: 20px;
+    width: 90%;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  .name_company{
+    font-size: 40px;
+  }
+  
+  .text{
+    top: 65%;
+    font-size: 16px;
+    width: 90%;
+  }
+
+}
 
 
 @media (min-width: 700px) and (max-width: 1400px){

@@ -14,7 +14,6 @@ export async function loader({request, context}: LoaderFunctionArgs) {
     status: 200,
     headers: {
       'Content-Type': 'text/plain',
-
       'Cache-Control': `max-age=${60 * 60 * 24}`,
     },
   });

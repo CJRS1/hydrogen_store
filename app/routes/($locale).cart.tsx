@@ -8,7 +8,7 @@ import {useRootLoaderData} from '~/lib/root-data';
 import {AnalyticsPageType} from '@shopify/hydrogen';
 
 export const meta: MetaFunction = () => {
-  return [{title: `Hydrogen | Cart`}];
+  return [{title: `RShippingPeru | Cart`}];
 };
 
 export async function action({request, context}: ActionFunctionArgs) {

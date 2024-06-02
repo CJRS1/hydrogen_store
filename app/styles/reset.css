@@ -4,6 +4,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
+  background: black;
 }
 
 
@@ -45,12 +46,11 @@ p {
 }
 
 a {
-  color: #000;
+  color: white;
   text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
   cursor: pointer;
 }
 

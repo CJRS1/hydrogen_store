@@ -9,7 +9,7 @@ import type {
 import bg from '../assets/bg.jpg'
 
 export const meta: MetaFunction = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{title: 'RShippingPeru | Home'}];
 };
 
 export async function loader({context}: LoaderFunctionArgs) {
