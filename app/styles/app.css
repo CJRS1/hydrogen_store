@@ -713,6 +713,10 @@ aside li {
     }
   }
 
+  .products-grid{
+      grid-template-columns: none; /* Anula la regla grid-template-columns */
+  }
+
 }
 
 @media (max-width: 550px) {
