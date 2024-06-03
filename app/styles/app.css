@@ -695,6 +695,10 @@ aside li {
   margin-top: 50px;
 }
 
+.checkout_button{
+  color: black;
+}
+
 @media (max-width: 700px) {
 
   .name_company{
