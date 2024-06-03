@@ -1,3 +1,4 @@
+import React, { useRef, useEffect, useState } from 'react';
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link, type MetaFunction} from '@remix-run/react';
 import {Suspense} from 'react';
@@ -24,6 +25,34 @@ export async function loader({context}: LoaderFunctionArgs) {
 
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
+
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShowVideo(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (videoContainerRef.current) {
+      observer.observe(videoContainerRef.current);
+    }
+
+    return () => {
+      if (videoContainerRef.current) {
+        observer.unobserve(videoContainerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="home">
       <img src={bg} className="img_top" alt="" />
@@ -35,7 +64,7 @@ export default function Homepage() {
         wall decor.
       </p>
       </div>
-      <div className="video_container">
+      <div className={`video_container ${showVideo ? 'show' : ''}`} ref={videoContainerRef}>
       <video src={video} className="video" loop autoPlay muted playsInline>
           Your browser does not support the video tag.
         </video>

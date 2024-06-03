@@ -510,13 +510,39 @@ aside li {
   align-items: center;
   margin-top: 40px;
   width: 100%;
-  video{
+  /* video{
     width: 80%;
     border-radius: 20px;
+  } */
+}
+
+.video_container video {
+  width: 80%;
+  border-radius: 20px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.video_container.show video {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.collection{
+  width: 80%;
+  /* min-height: 200vh; */
+  h1{
+    color: white;
+  }
+  p{
+    color: white;
   }
 }
 
-
+.collection_container{
+  margin-top: 50px;
+}
 
 @media (max-width: 700px) {
 

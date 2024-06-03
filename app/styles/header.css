@@ -89,8 +89,8 @@
     display: none;
     position: absolute;
     top: 140%;
-    left: -140%;
-    background: white;
+    left: -145%;
+    /* background: white; */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     min-height: 31px;
   }
@@ -105,7 +105,7 @@
   }
   
   .submenu-item:hover {
-    background-color: yellow
+    text-decoration: underline;
   }
 
   @media (max-width: 767.2px){

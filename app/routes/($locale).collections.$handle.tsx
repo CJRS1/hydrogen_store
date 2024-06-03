@@ -40,7 +40,7 @@ export default function Collection() {
   const {collection} = useLoaderData<typeof loader>();
   console.log('holña0,',collection)
   return (
-    <div className="collection">
+    <div className="collection collection_container">
       <h1>{collection.title}</h1>
       <p className="collection-description">{collection.description}</p>
       <Pagination connection={collection.products}>
@@ -95,6 +95,7 @@ function ProductItem({
     >
       {product.featuredImage && (
         <Image
+        className='img'
           alt={product.featuredImage.altText || product.title}
           aspectRatio="1/1"
           data={product.featuredImage}

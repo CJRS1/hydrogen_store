@@ -11,6 +11,7 @@ import type {
   ProductFragment,
   ProductVariantsQuery,
   ProductVariantFragment,
+  RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import {
   Image,
@@ -71,11 +72,20 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
   // into it's own separate query that is deferred. So there's a brief moment
   // where variant options might show as available when they're not, but after
   // this deffered query resolves, the UI will update.
-  const variants = storefront.query(VARIANTS_QUERY, {
+  const variantsPromise = storefront.query(VARIANTS_QUERY, {
     variables: {handle},
   });
 
-  return defer({product, variants});
+  const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
+  const featuredCollection = collections.nodes[0];
+  const recommendedProductsPromise = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
+
+  return defer({
+    product,
+    variants: variantsPromise,
+    featuredCollection,
+    recommendedProducts: recommendedProductsPromise,
+  });
 }
 
 function redirectToFirstVariant({
@@ -102,16 +112,25 @@ function redirectToFirstVariant({
 }
 
 export default function Product() {
-  const {product, variants} = useLoaderData<typeof loader>();
-  const {selectedVariant} = product;
+  const { product, variants, recommendedProducts } = useLoaderData<typeof loader>();
+  const { selectedVariant } = product;
+  console.log('hola', recommendedProducts)
+
   return (
-    <div className="product">
-      <ProductImage image={selectedVariant?.image} />
-      <ProductMain
-        selectedVariant={selectedVariant}
-        product={product}
-        variants={variants}
-      />
+    <div className="product_container">
+      <div className="product">
+        <ProductImage image={selectedVariant?.image} />
+        <ProductMain
+          selectedVariant={selectedVariant}
+          product={product}
+          variants={variants}
+        />
+      </div>
+      <Suspense fallback={<div>Loading recommended products...</div>}>
+        <Await resolve={recommendedProducts}>
+          {(data) => <RecommendedProducts products={recommendedProducts} />}
+        </Await>
+      </Suspense>
     </div>
   );
 }
@@ -303,6 +322,44 @@ function ProductOptions({option}: {option: VariantOption}) {
   );
 }
 
+function RecommendedProducts({
+  products,
+}: {
+  products: Promise<RecommendedProductsQuery>;
+}) {
+  return (
+    <div className="recommended-products">
+      <h2>Recommended Products</h2>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Await resolve={products}>
+          {({products}) => (
+            <div className="recommended-products-grid">
+              {products.nodes.map((product) => (
+                <Link
+                  key={product.id}
+                  className="recommended-product"
+                  to={`/products/${product.handle}`}
+                >
+                  <Image
+                    data={product.images.nodes[0]}
+                    aspectRatio="1/1"
+                    sizes="(min-width: 45em) 20vw, 50vw"
+                  />
+                  <h4>{product.title}</h4>
+                  <small>
+                    <Money data={product.priceRange.minVariantPrice} />
+                  </small>
+                </Link>
+              ))}
+            </div>
+          )}
+        </Await>
+      </Suspense>
+      <br />
+    </div>
+  );
+}
+
 // function AddToCartButton({
 //   analytics,
 //   children,
@@ -437,6 +494,61 @@ const VARIANTS_QUERY = `#graphql
   ) @inContext(country: $country, language: $language) {
     product(handle: $handle) {
       ...ProductVariants
+    }
+  }
+` as const;
+
+
+const FEATURED_COLLECTION_QUERY = `#graphql
+  fragment FeaturedCollection on Collection {
+    id
+    title
+    image {
+      id
+      url
+      altText
+      width
+      height
+    }
+    handle
+  }
+  query FeaturedCollection($country: CountryCode, $language: LanguageCode)
+    @inContext(country: $country, language: $language) {
+    collections(first: 1, sortKey: UPDATED_AT, reverse: true) {
+      nodes {
+        ...FeaturedCollection
+      }
+    }
+  }
+` as const;
+
+const RECOMMENDED_PRODUCTS_QUERY = `#graphql
+  fragment RecommendedProduct on Product {
+    id
+    title
+    handle
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    images(first: 1) {
+      nodes {
+        id
+        url
+        altText
+        width
+        height
+      }
+    }
+  }
+  query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
+    @inContext(country: $country, language: $language) {
+    products(first: 4, sortKey: UPDATED_AT, reverse: true) {
+      nodes {
+        ...RecommendedProduct
+      }
     }
   }
 ` as const;
