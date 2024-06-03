@@ -1,55 +1,52 @@
-/*
+/* 
 * --------------------------------------------------
 * components/Header
 * --------------------------------------------------
 */
 .header {
-    align-items: center;
-    background: transparent;
-    display: flex;
-    justify-content: space-around;
-    height: var(--header-height);
-    width: 100%;
-    position: fixed;
-    margin-top: 40px;
-    top: 0;
-    z-index: 1;
-    font-size: 20px;
-    /* background-color: hsla(var(--color-contrast), var(--bg-opacity)); */
-    a{
-        color: white !important;
-    }
-    strong{
-        color: white;
-        font-size: 25px;
-    }
-    section{
-        display: none;
-    }
+  align-items: center;
+  background: transparent;
+  display: flex;
+  justify-content: space-around;
+  height: var(--header-height);
+  width: 100%;
+  position: fixed;
+  margin-top: 40px;
+  top: 0;
+  z-index: 1;
+  font-size: 20px;
+  /* background-color: hsla(var(--color-contrast), var(--bg-opacity)); */
+  a {
+    color: white !important;
   }
-
-
-  
-  .header-menu-mobile-toggle {
-    @media (min-width: 48em) {
-      display: none;
-    }
+  strong {
+    color: white;
+    font-size: 25px;
   }
-  
-  .header-menu-mobile {
-    display: flex;
-    flex-direction: column;
-    grid-gap: 1rem;
+  section {
+    display: none;
   }
+}
 
-  .header-menu-desktop{
-    display: flex;
-    justify-content: space-between;
-    width: 200px;
-
+.header-menu-mobile-toggle {
+  @media (min-width: 48em) {
+    display: none;
   }
-  
-  /* .header-menu-desktop {
+}
+
+.header-menu-mobile {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
+}
+
+.header-menu-desktop {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+/* .header-menu-desktop {
     display: none;
     grid-gap: 1rem;
     @media (min-width: 45em) {
@@ -58,67 +55,81 @@
       margin-left: 3rem;
     }
   } */
-  .cart_count{
-    position: relative;
-    height: 25px;
-    strong{
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        font-size: 15px;
-      }
+.cart_count {
+  position: relative;
+  height: 25px;
+  strong {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 15px;
   }
-  
-  .header-menu-item {
-    cursor: pointer;
-    color: white !important;
-  }
-  
-  .header-ctas {
-    align-items: center;
-    display: flex;
-    grid-gap: 1rem;
-    /* margin-left: auto; */
-  }
+}
+
+.header-menu-item {
+  cursor: pointer;
+  color: white;
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+.header-ctas {
+  align-items: center;
+  display: flex;
+  grid-gap: 1rem;
+  /* margin-left: auto; */
+}
 
 .header-menu-item-container {
-    position: relative;
-  }
-  
-  .submenu {
-    display: none;
-    position: absolute;
-    top: 140%;
-    left: -145%;
-    /* background: white; */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    min-height: 31px;
-  }
-  
-  .header-menu-item-container:hover .submenu {
-    display: block;
-  }
-  
-  .submenu-item {
-    padding: 10px 20px;
-    white-space: nowrap;
-  }
-  
-  .submenu-item:hover {
-    text-decoration: underline;
+  position: relative;
+  margin: 10px;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 140%;
+  left: -145%;
+  /* background: white; */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  min-height: 31px;
+}
+
+.submenu.visible {
+  display: block;
+  position: static;
+  box-shadow: none;
+}
+
+.header-menu-item-container:hover .submenu {
+  display: block;
+}
+
+.submenu-item {
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+
+.submenu-item:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 767.2px) {
+  .header {
+    strong {
+      font-size: 20px;
+    }
   }
 
-  @media (max-width: 767.2px){
-    .header{
-        strong{
-          font-size: 20px;
-        }
-      }
-    
-    section{
-        display: block;
-    }
-    .header-menu-desktop{
-        display: none;
-    }
+  section {
+    display: block;
   }
+  .header-menu-desktop {
+    display: none;
+  }
+  .header-menu-item-container:hover .submenu {
+    display: none;
+  }
+  
+}
+
