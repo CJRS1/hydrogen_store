@@ -31,7 +31,7 @@ export function Aside({
           <h3>{heading}</h3>
           <CloseAside />
         </header>
-        <main>{children}</main>
+        <main className="search_container">{children}</main>
       </aside>
     </div>
   );

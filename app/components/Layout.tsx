@@ -84,6 +84,7 @@ function SearchAside() {
               />
               &nbsp;
               <button
+              className='search_button'
                 onClick={() => {
                   window.location.href = inputRef?.current?.value
                     ? `/search?q=${inputRef.current.value}`

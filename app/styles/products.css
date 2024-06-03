@@ -96,10 +96,26 @@
   animation: glowing 20s linear infinite;
 }
 
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
 @media (max-width: 700px) {
   .product-image img {
     height: 320px;
     width: auto;
     margin-bottom: 30px;
+  }
+  .add_to_cart_button{
+    font-size: 15px;
+    padding: 10px 15px;
   }
 }
